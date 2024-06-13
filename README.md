@@ -1,4 +1,4 @@
-# README
+# Asciidoctor WebAssembly Module
 
 ## Overview
 
@@ -8,7 +8,7 @@ This module provides an interface for converting Asciidoctor content to various 
 
 Ensure you have Node.js installed, then install the necessary dependencies:
 
-This module is available on JSR: [https://jsr.io/@asciidoctor/wasm](https://jsr.io/@asciidoctor/wasm)
+This module is available on JSR: [https://jsr.io/@tani/asciidoctor-wasm](https://jsr.io/@tani/asciidoctor-wasm)
 
 ## Usage
 
@@ -17,9 +17,7 @@ This module is available on JSR: [https://jsr.io/@asciidoctor/wasm](https://jsr.
 You can import the necessary functions and constants from the module:
 
 ```typescript
-import { dirname } from "jsr:@std/path";
-import { DefaultRubyVM } from "./ruby.ts";
-import { initFromModule, initFromURL, wasmURL, AsciidoctorOptions, Convert } from "./your_module";
+import { initFromModule, initFromURL, wasmURL, AsciidoctorOptions, Convert } from "@tani/asciidoctor-wasm";
 ```
 
 ### Initializing the Converter
@@ -38,7 +36,7 @@ const convert = await initFromModule(module);
 To initialize the Asciidoctor converter from a WebAssembly binary located at a URL:
 
 ```typescript
-const convert = await initFromURL();
+const convert = await initFromURL(wasmURL);
 ```
 
 ### Converting Asciidoctor Content
