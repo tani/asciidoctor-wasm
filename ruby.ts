@@ -8,6 +8,7 @@ import {
 } from "npm:@bjorn3/browser_wasi_shim";
 import { consolePrinter } from "npm:@ruby/wasm-wasi/dist/console";
 
+// https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
 // https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/packages/npm-packages/ruby-wasm-wasi/src/browser.ts
 
 /**
