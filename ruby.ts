@@ -1,12 +1,12 @@
-import { RubyVM } from "npm:@ruby/wasm-wasi";
-import type { Fd } from "npm:@bjorn3/browser_wasi_shim";
+import { RubyVM } from "@ruby/wasm-wasi";
+import type { Fd } from "@bjorn3/browser_wasi_shim";
 import {
   File,
   OpenFile,
   PreopenDirectory,
   WASI,
-} from "npm:@bjorn3/browser_wasi_shim";
-import { consolePrinter } from "npm:@ruby/wasm-wasi/dist/console";
+} from "@bjorn3/browser_wasi_shim";
+import { consolePrinter } from "@ruby/wasm-wasi/dist/console";
 
 // https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
 // https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/packages/npm-packages/ruby-wasm-wasi/src/browser.ts
@@ -74,7 +74,7 @@ export async function DefaultRubyVM(
 
   printer?.setMemory(instance.exports.memory as WebAssembly.Memory);
 
-  wasi.initialize(instance);
+  wasi.initialize(instance as any);
   vm.initialize();
 
   return { vm, wasi, instance };
