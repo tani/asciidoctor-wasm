@@ -1,5 +1,5 @@
 {
-  "name": "@tani/asciidoctor",
+  "name": "@tani/asciidoctor-wasm",
   "exports": "./asciidoctor.ts",
   "version": "0.1.0",
   "auhor": "Masaya Taniguchi",

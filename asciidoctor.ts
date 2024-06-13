@@ -76,11 +76,11 @@ export async function initFromModule(
  * @async
  * @function initFromURL
  *
- * @param {string} [url=wasmURL] - The URL of the WebAssembly binary. Defaults to `wasmURL`.
+ * @param {string} url - The URL of the WebAssembly binary.
  *
  * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
  */
-export async function initFromURL(url: string = wasmURL): Promise<Convert> {
+export async function initFromURL(url: string): Promise<Convert> {
   const module = await WebAssembly.compileStreaming(fetch(url));
   return initFromModule(module);
 }
