@@ -81,6 +81,12 @@ Returns a `Promise<Convert>`.
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+WASM binary contains a copy of several OSSs as follows:
 
-For further details or support, please refer to the official documentation or contact the module's maintainers.
+- Ruby: https://www.ruby-lang.org/en/about/license.txt
+- Asciidoctor: https://github.com/asciidoctor/asciidoctor/blob/e070613f0932b18cfb64370a8f0b6a0831eee4cd/LICENSE
+- ruby.wasm: https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
+
+If you notice the missing license information, please let us know.
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
