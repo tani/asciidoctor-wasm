@@ -1,7 +1,7 @@
 {
   "name": "asciidoctor-wasm",
   "exports": "./asciidoctor.ts",
-  "version": "0.2023.4",
+  "version": "0.2023.5",
   "main": "dist/node.js",
   "module": "dist/node.mjs",
   "browser": "dist/browser.mjs",
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "node --import tsx --test test/**/*.test.ts",
     "install": "bundle install",
-    "build": "tsup src/*.ts --format esm,cjs --dts",
+    "build": "rm -rf dist/ && tsup src/*.ts --format esm,cjs --dts",
     "postbuild": "bundle exec rbwasm build -o dist/asciidoctor.wasm"
   },
   "files": [
