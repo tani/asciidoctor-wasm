@@ -8,8 +8,6 @@ This module provides an interface for converting Asciidoctor content to various 
 
 Ensure you have Node.js installed, then install the necessary dependencies:
 
-This module is available on JSR: [https://jsr.io/@tani/asciidoctor-wasm](https://jsr.io/@tani/asciidoctor-wasm)
-
 ## Usage
 
 ### Importing the Module
@@ -17,7 +15,8 @@ This module is available on JSR: [https://jsr.io/@tani/asciidoctor-wasm](https:/
 You can import the necessary functions and constants from the module:
 
 ```typescript
-import { initFromModule, initFromURL, wasmURL, AsciidoctorOptions, Convert } from "@tani/asciidoctor-wasm";
+import * as Asciidoctor from "asciidoctor-wasm/node";
+// import * as Asciidoctor from "asciidoctor-wasm/browser";
 ```
 
 ### Initializing the Converter
@@ -27,8 +26,9 @@ import { initFromModule, initFromURL, wasmURL, AsciidoctorOptions, Convert } fro
 To initialize the Asciidoctor converter from a WebAssembly module:
 
 ```typescript
-const module = await WebAssembly.compileStreaming(fetch('path/to/asciidoctor.wasm'));
-const convert = await initFromModule(module);
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const module = await WebAssembly.compileStreaming(fetch(wasmURL));
+const convert = await Asciidoctor.init(module);
 ```
 
 #### From a WebAssembly URL
@@ -36,7 +36,19 @@ const convert = await initFromModule(module);
 To initialize the Asciidoctor converter from a WebAssembly binary located at a URL:
 
 ```typescript
-const convert = await initFromURL(wasmURL);
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const convert = await Asciidoctor.init(wasmURL);
+```
+
+#### From a WebAssembly Path
+
+To initialize the Asciidoctor converter from a WebAssembly binary located at a path:
+
+```typescript
+import {fileURLToPath} from 'node:url';
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const wasmPath = fileURLToPath(wasmURL);
+const convert = await Asciidoctor.init(wasmPath);
 ```
 
 ### Converting Asciidoctor Content
@@ -57,23 +69,14 @@ console.log(convertedContent);
 
 ## API
 
-### `wasmURL`
 
-Constant URL for the Asciidoctor WebAssembly binary.
-
-### `initFromModule(module: WebAssembly.Module): Promise<Convert>`
+### `init(module: WebAssembly.Module | string): Promise<Convert>`
 
 Initializes the Asciidoctor converter from a WebAssembly module.
 
 * `module`: The WebAssembly module to initialize from.
-
-Returns a `Promise<Convert>`.
-
-### `initFromURL(url: string = wasmURL): Promise<Convert>`
-
-Initializes the Asciidoctor converter from a WebAssembly binary located at a URL.
-
-* `url` (optional): The URL of the WebAssembly binary. Defaults to `wasmURL`.
+* `url`: The URL of the WebAssembly binary.
+* `path`: The path of the WebAssembly binary.
 
 Returns a `Promise<Convert>`.
 

@@ -1,0 +1,30 @@
+{
+  "name": "asciidoctor-wasm",
+  "exports": "./asciidoctor.ts",
+  "version": "0.1.0",
+  "main": "dist/node.js",
+  "module": "dist/node.mjs",
+  "browser": "dist/browser.mjs",
+  "author": "Masaya Taniguchi",
+  "scripts": {
+    "test": "node --import tsx --test test/**/*.test.ts",
+    "install": "bundle install",
+    "build": "tsup src/*.ts --format esm,cjs",
+    "postbuild": "bundle exec rbwasm build -o dist/asciidoctor.wasm"
+  },
+  "files": [
+    "package.json",
+    "README.md",
+    "dist/*",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "@ruby/wasm-wasi": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "tsup": "^8.1.0",
+    "tsx": "^4.15.4",
+    "typescript": "^5.4.5"
+  }
+}

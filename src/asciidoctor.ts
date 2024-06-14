@@ -1,5 +1,7 @@
-import { dirname } from "@std/path";
-import { DefaultRubyVM } from "./ruby.ts";
+import { readFile } from "node:fs/promises";
+import { RubyVM } from "@ruby/wasm-wasi/dist/vm";
+
+type DefaultRubyVM = (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
 
 /**
  * Interface for Asciidoctor options.
@@ -34,25 +36,17 @@ export type Convert = (
 ) => Promise<string>;
 
 /**
- * URL for the Asciidoctor WebAssembly binary.
- *
- * @constant wasmURL
- * @type {string}
- */
-export const wasmURL: string = `${dirname(import.meta.url)}/asciidoctor.wasm`;
-
-/**
  * Initializes the Asciidoctor converter from a WebAssembly module.
  *
  * @async
  * @function initFromModule
  *
  * @param {WebAssembly.Module} module - The WebAssembly module to initialize from.
- *
  * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
  */
 export async function initFromModule(
   module: WebAssembly.Module,
+  DefaultRubyVM: DefaultRubyVM
 ): Promise<Convert> {
   const { vm } = await DefaultRubyVM(module);
   const convert = await vm.evalAsync(`
@@ -76,11 +70,21 @@ export async function initFromModule(
  * @async
  * @function initFromURL
  *
- * @param {string} url - The URL of the WebAssembly binary.
- *
+ * @param {URL} url - The URL of the WebAssembly binary.
  * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
  */
-export async function initFromURL(url: string): Promise<Convert> {
+export async function initFromURL(url: string | URL, DefaultRubyVM: DefaultRubyVM): ReturnType<typeof initFromModule> {
   const module = await WebAssembly.compileStreaming(fetch(url));
-  return initFromModule(module);
+  return initFromModule(module, DefaultRubyVM);
+}
+
+/**
+ * Initializes the WebAssembly module from a given path.
+ *
+ * @param {string} path - The path to the WebAssembly file.
+ * @returns {Promise<Convert>} - A promise that resolves to a Convert function.
+ */
+export async function initFromPath(path: string, DefaultRubyVM: DefaultRubyVM): ReturnType<typeof initFromModule> {
+  const module = await WebAssembly.compile(await readFile(path));
+  return initFromModule(module, DefaultRubyVM);
 }
