@@ -69,6 +69,14 @@ const convertedContent = await convert(asciidoctorContent, options);
 console.log(convertedContent);
 ```
 
+## Versioning
+
+This module follows the versioning of the Asciidoctor library it is based on.
+
+- `0.<asciidoctor>.<asciidoctor-wasm>`
+    - `<asciidoctor>`: Asciidoctor version; e.g., `2023` is based on Asciidoctor 2.0.23.
+    - `<asciidoctor-wasm>`: Asciidoctor WebAssembly module version.
+
 ## License
 
 WASM binary contains a copy of several OSSs as follows:
