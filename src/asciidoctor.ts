@@ -1,5 +1,5 @@
 import { readFile } from "node:fs/promises";
-import { RubyVM } from "@ruby/wasm-wasi/dist/vm";
+import type { RubyVM } from "@ruby/wasm-wasi/dist/vm";
 
 type DefaultRubyVM = (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
 
