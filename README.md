@@ -28,7 +28,7 @@ import * as Asciidoctor from "asciidoctor-wasm/node";
 To initialize the Asciidoctor converter from a WebAssembly module:
 
 ```typescript
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
 const module = await WebAssembly.compileStreaming(fetch(wasmURL));
 const convert = await Asciidoctor.init(module);
 ```
@@ -38,7 +38,7 @@ const convert = await Asciidoctor.init(module);
 To initialize the Asciidoctor converter from a WebAssembly binary located at a URL:
 
 ```typescript
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
 const convert = await Asciidoctor.init(wasmURL);
 ```
 
@@ -48,7 +48,7 @@ To initialize the Asciidoctor converter from a WebAssembly binary located at a p
 
 ```typescript
 import {fileURLToPath} from 'node:url';
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm')
+const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
 const wasmPath = fileURLToPath(wasmURL);
 const convert = await Asciidoctor.init(wasmPath);
 ```
@@ -74,8 +74,12 @@ console.log(convertedContent);
 WASM binary contains a copy of several OSSs as follows:
 
 - Ruby: https://www.ruby-lang.org/en/about/license.txt
+    - libyaml: https://github.com/yaml/libyaml/blob/840b65c40675e2d06bf40405ad3f12dec7f35923/License
+    - zlib: https://github.com/madler/zlib/blob/0f51fb4933fc9ce18199cb2554dacea8033e7fd3/LICENSE
+    - OpenSSL: https://www.openssl.org/source/license.html
 - Asciidoctor: https://github.com/asciidoctor/asciidoctor/blob/e070613f0932b18cfb64370a8f0b6a0831eee4cd/LICENSE
 - ruby.wasm: https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
+    - wasi-vfs: https://github.com/kateinoigakukun/wasi-vfs/blob/ad74438287035ea01f3ce895e495740f7981215c/LICENSE
 
 If you notice the missing license information, please let us know.
 
