@@ -13,6 +13,7 @@ type DefaultRubyVM = (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
  * @property {'article' | 'book' | 'manpage' | 'inline'} doctype - The document type to use for rendering.
  * @property {boolean} standalone - Whether to produce a standalone document.
  * @property {boolean} sourcemap - Whether to include a sourcemap in the output.
+ * @property {'safe' | 'unsafe' | 'server' | 'secure'} safe - The safe mode to use for rendering.
  */
 export interface AsciidoctorOptions {
   attributes?: { [key: string]: string | null | false };
@@ -20,6 +21,7 @@ export interface AsciidoctorOptions {
   doctype?: "article" | "book" | "manpage" | "inline";
   standalone?: boolean;
   sourcemap?: boolean;
+  safe?: "safe" | "unsafe" | "server" | "secure";
 }
 
 /**
@@ -54,6 +56,7 @@ export async function initFromModule(
     require 'json'
     lambda do |args|
       content, options = JSON.parse(args.to_s, symbolize_names: true)
+      options.safe = options.safe.to_sym if options.key?(:safe)
       Asciidoctor.convert(content.to_s, options)
     end
   `);
