@@ -1,10 +1,14 @@
-# Asciidoctor WebAssembly Module
+# Asciidoctor WASM
 
 ## Overview
 
 This module provides an interface for converting Asciidoctor content to various formats using WebAssembly.
 It supports conversion to `html5`, `docbook5`, and `manpage` backends, and allows for customization through various options.
 The conversion is powered by Ruby's Asciidoctor library running in a WebAssembly (WASM) environment.
+
+## Playground
+
+You can try out the Asciidoctor WASM in the [Playground](https://tani.github.io/asciidoctor-wasm/).
 
 ## Installation
 
