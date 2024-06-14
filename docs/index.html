@@ -4,10 +4,9 @@
     <title>Asciidoctor WASM Playground</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    </meta>
     <!-- bootstrap -->
     <script type="module">
-      import * as Asciidoctor from './browser.mjs';
+      import * as Asciidoctor from 'https://esm.sh/asciidoctor-wasm/dist/browser.mjs';
       const input = document.getElementById('input');
       const output = document.getElementById('output');
       const button = document.getElementById('convert');
@@ -17,7 +16,7 @@
         count++;
       }, 500);
       button.disabled = true;
-      const convert = await Asciidoctor.initFromURL('./asciidoctor.wasm');
+      const convert = await Asciidoctor.initFromURL('https://raw.esm.sh/asciidoctor-wasm/dist/asciidoctor.wasm');
       clearInterval(id);
       button.disabled = false;
       button.textContent = 'Convert';
