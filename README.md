@@ -2,7 +2,9 @@
 
 ## Overview
 
-This module provides an interface for converting Asciidoctor content to various formats using WebAssembly. It supports conversion to `html5`, `docbook5`, and `manpage` backends, and allows for customization through various options. The conversion is powered by Ruby's Asciidoctor library running in a WebAssembly (WASM) environment.
+This module provides an interface for converting Asciidoctor content to various formats using WebAssembly.
+It supports conversion to `html5`, `docbook5`, and `manpage` backends, and allows for customization through various options.
+The conversion is powered by Ruby's Asciidoctor library running in a WebAssembly (WASM) environment.
 
 ## Installation
 
@@ -66,19 +68,6 @@ const options: AsciidoctorOptions = {
 const convertedContent = await convert(asciidoctorContent, options);
 console.log(convertedContent);
 ```
-
-## API
-
-
-### `init(module: WebAssembly.Module | string): Promise<Convert>`
-
-Initializes the Asciidoctor converter from a WebAssembly module.
-
-* `module`: The WebAssembly module to initialize from.
-* `url`: The URL of the WebAssembly binary.
-* `path`: The path of the WebAssembly binary.
-
-Returns a `Promise<Convert>`.
 
 ## License
 
