@@ -56,7 +56,7 @@ export async function initFromModule(
     require 'json'
     lambda do |args|
       content, options = JSON.parse(args.to_s, symbolize_names: true)
-      options.safe = options.safe.to_sym if options.key?(:safe)
+      options[:safe] = options[:safe].to_sym if options.key?(:safe)
       Asciidoctor.convert(content.to_s, options)
     end
   `);
