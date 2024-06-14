@@ -10,6 +10,10 @@ The conversion is powered by Ruby's Asciidoctor library running in a WebAssembly
 
 Ensure you have Node.js installed, then install the necessary dependencies:
 
+```sh
+npm install asciidoctor-wasm
+```
+
 ## Usage
 
 ### Importing the Module
