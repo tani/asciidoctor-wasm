@@ -90,6 +90,7 @@ WASM binary contains a copy of several OSSs as follows:
     - zlib: https://github.com/madler/zlib/blob/0f51fb4933fc9ce18199cb2554dacea8033e7fd3/LICENSE
     - OpenSSL: https://www.openssl.org/source/license.html
 - Asciidoctor: https://github.com/asciidoctor/asciidoctor/blob/e070613f0932b18cfb64370a8f0b6a0831eee4cd/LICENSE
+- Rouge: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
 - ruby.wasm: https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
     - wasi-vfs: https://github.com/kateinoigakukun/wasi-vfs/blob/ad74438287035ea01f3ce895e495740f7981215c/LICENSE
 
