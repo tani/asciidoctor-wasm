@@ -26,11 +26,9 @@ You can import the necessary functions and constants from the module:
 
 ```typescript
 // Node
-import { Asciidoctor } from "asciidoctor-wasm/dist/node.js";
+import { Asciidoctor, wasmURL } from "asciidoctor-wasm/dist/node.js";
 // Browser or Deno
-import { Asciidoctor } from "asciidoctor-wasm/dist/browser.js";
-
-Asciidoctor.wasmURL // URL to the WebAssembly binary
+import { Asciidoctor, wasmURL } from "asciidoctor-wasm/dist/browser.js";
 ```
 
 ### Initializing the Converter
