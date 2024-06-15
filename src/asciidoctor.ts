@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import type { RubyVM } from "@ruby/wasm-wasi/dist/vm";
 
 type DefaultRubyVM = (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
@@ -40,11 +39,16 @@ export type Convert = (
 /**
  * Initializes the Asciidoctor converter from a WebAssembly module.
  *
- * @async
- * @function initFromModule
+ * @param {WebAssembly.Module} module - The WebAssembly module to initialize the converter from.
+ * @param {DefaultRubyVM} DefaultRubyVM - The default Ruby virtual machine.
  *
- * @param {WebAssembly.Module} module - The WebAssembly module to initialize from.
- * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
+ * @returns {Promise<Convert>} - Returns a promise that resolves to a function that can be used to convert Asciidoctor content.
+ * This function takes a content string and an optional options object as parameters. The options object can be used to customize the conversion process.
+ * The function returns a promise that resolves to the converted content as a string.
+ *
+ * @example
+ * const convert = await initFromModule(myModule, myDefaultRubyVM);
+ * const html = await convert('== Hello, AsciiDoc!', {safe: 'safe'});
  */
 export async function initFromModule(
   module: WebAssembly.Module,
@@ -65,29 +69,4 @@ export async function initFromModule(
     const result = await convert.callAsync("call", vm.wrap(args));
     return result.toString();
   };
-}
-
-/**
- * Initializes the Asciidoctor converter from a WebAssembly binary located at a URL.
- *
- * @async
- * @function initFromURL
- *
- * @param {URL} url - The URL of the WebAssembly binary.
- * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
- */
-export async function initFromURL(url: string | URL, DefaultRubyVM: DefaultRubyVM): ReturnType<typeof initFromModule> {
-  const module = await WebAssembly.compileStreaming(fetch(url));
-  return initFromModule(module, DefaultRubyVM);
-}
-
-/**
- * Initializes the WebAssembly module from a given path.
- *
- * @param {string} path - The path to the WebAssembly file.
- * @returns {Promise<Convert>} - A promise that resolves to a Convert function.
- */
-export async function initFromPath(path: string, DefaultRubyVM: DefaultRubyVM): ReturnType<typeof initFromModule> {
-  const module = await WebAssembly.compile(await readFile(path));
-  return initFromModule(module, DefaultRubyVM);
 }

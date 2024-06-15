@@ -30,5 +30,6 @@ esbuild.build({
   entryPoints: ['./src/browser.ts'],
   outdir: 'docs/',
   minify: true,
-  external: ['node:fs/promises']
+  platform: 'browser',
+  target: ['es2022'],
 })
