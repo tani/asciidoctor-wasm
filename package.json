@@ -1,11 +1,14 @@
 {
   "name": "asciidoctor-wasm",
-  "exports": "./asciidoctor.ts",
-  "version": "0.2023.12",
+  "version": "0.2023.13",
   "type": "module",
   "main": "dist/node.js",
-  "module": "dist/node.js",
-  "browser": "dist/browser.js",
+  "exports": {
+    ".": {
+      "browser": "./dist/browser.js",
+      "import": "./dist/node.js"
+    }
+  },
   "author": "Masaya Taniguchi",
   "scripts": {
     "test": "node --import tsx --test test/*.test.ts",

@@ -1,6 +1,9 @@
 import { promises as fs } from 'node:fs';
 import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/node';
 import { Asciidoctor } from './asciidoctor.ts';
+export type { Asciidoctor, AsciidoctorOptions } from './asciidoctor.ts';
+
+export const wasmURL = new URL('../dist/asciidoctor.wasm', import.meta.url);
 
 /**
  * Initializes the Asciidoctor converter from a WebAssembly module.

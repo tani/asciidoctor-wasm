@@ -1,5 +1,8 @@
 import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/browser';
 import { Asciidoctor } from './asciidoctor.ts';
+export type { Asciidoctor, AsciidoctorOptions } from './asciidoctor.ts';
+
+export const wasmURL = new URL('../dist/asciidoctor.wasm', import.meta.url);
 
 /**
  * Initializes the Asciidoctor converter from a WebAssembly module.
