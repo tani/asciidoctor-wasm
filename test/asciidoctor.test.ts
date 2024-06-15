@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert";
-import * as Asciidoctor from "../dist/node.js";
+import { Asciidoctor } from "../dist/node.js";
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
   const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;

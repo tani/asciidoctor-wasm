@@ -26,9 +26,9 @@ You can import the necessary functions and constants from the module:
 
 ```typescript
 // Node
-import * as Asciidoctor from "asciidoctor-wasm/dist/node.js";
+import { Asciidoctor } from "asciidoctor-wasm/dist/node.js";
 // Browser or Deno
-import * as Asciidoctor from "asciidoctor-wasm/dist/browser.js";
+import { Asciidoctor } from "asciidoctor-wasm/dist/browser.js";
 
 Asciidoctor.wasmURL // URL to the WebAssembly binary
 ```
