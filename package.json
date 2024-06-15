@@ -1,14 +1,11 @@
 {
   "name": "asciidoctor-wasm",
-  "version": "0.2023.14",
+  "version": "0.2023.15",
   "type": "module",
   "main": "dist/node.js",
   "exports": {
-    ".": {
-      "browser": "./dist/browser.js",
-      "import": "./dist/node.js",
-      "deno": "./dist/browser.js"
-    }
+    "./dist/browser.js": "./dist/browser.js",
+    "./dist/node.js": "./dist/node.js"
   },
   "author": "Masaya Taniguchi",
   "scripts": {
