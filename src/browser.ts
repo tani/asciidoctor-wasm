@@ -1,5 +1,5 @@
 import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/browser';
-import * as asciidoctor from './asciidoctor.ts';
+import { Asciidoctor } from './asciidoctor.ts';
 
 /**
  * Initializes the Asciidoctor converter from a WebAssembly module.
@@ -8,9 +8,9 @@ import * as asciidoctor from './asciidoctor.ts';
  * @function initFromModule
  *
  * @param {WebAssembly.Module} module - The WebAssembly module to initialize from.
- * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
+ * @returns {ReturnType<typeof initFromModule>} A function that can be used to convert Asciidoctor content.
  */
-export const initFromModule = (module: WebAssembly.Module) => asciidoctor.initFromModule(module, DefaultRubyVM);
+export const initFromModule = (module: WebAssembly.Module) => Asciidoctor.initFromModule(module, DefaultRubyVM);
 
 /**
  * Initializes the Asciidoctor converter from a WebAssembly binary located at a URL.
@@ -19,9 +19,9 @@ export const initFromModule = (module: WebAssembly.Module) => asciidoctor.initFr
  * @function initFromURL
  *
  * @param {URL} url - The URL of the WebAssembly binary.
- * @returns {Promise<Convert>} A function that can be used to convert Asciidoctor content.
+ * @returns {ReturnType<typeof initFromModule>} A function that can be used to convert Asciidoctor content.
  */
 export async function initFromURL(url: string | URL): ReturnType<typeof initFromModule> {
   const module = await WebAssembly.compileStreaming(fetch(url));
-  return asciidoctor.initFromModule(module, DefaultRubyVM);
+  return Asciidoctor.initFromModule(module, DefaultRubyVM);
 }

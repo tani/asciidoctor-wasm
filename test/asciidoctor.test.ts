@@ -4,16 +4,16 @@ import * as Asciidoctor from "../dist/node.js";
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
   const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
-  const convert = await Asciidoctor.initFromPath(path);
+  const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
-  const actualHtml = await convert(adoc);
+  const actualHtml = await asciidoctor.convert(adoc);
   const expectedHtml = "<div class=\"paragraph\">\n<p>This is AsciiDoc.</p>\n</div>";
   assert.strictEqual(actualHtml, expectedHtml);
 })
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
   const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
-  const convert = await Asciidoctor.initFromPath(path);
+  const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = `
 :source-highlighter: rouge
 :rouge-style: github
@@ -23,7 +23,7 @@ test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () =
 puts "Hello, World!"
 ----
   `
-  const actualHtml = await convert(adoc, { safe: "safe" });
+  const actualHtml = await asciidoctor.convert(adoc, { safe: "safe" });
   const expectedHtml =
     '<div class="listingblock">\n'+
     '<div class="content">\n'+

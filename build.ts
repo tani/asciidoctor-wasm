@@ -12,8 +12,7 @@ esbuild.build({
   entryPoints: ['./src/browser.ts'],
   outdir: 'dist/',
   packages: 'external',
-  platform: 'browser',
-  target: ['es2022'],
+  platform: 'browser'
 })
 
 esbuild.build({
@@ -21,8 +20,7 @@ esbuild.build({
   entryPoints: ['./src/node.ts'],
   outdir: 'dist/',
   packages: 'external',
-  platform: 'node',
-  target: ['node20'],
+  platform: 'node'
 })
 
 esbuild.build({
@@ -30,6 +28,5 @@ esbuild.build({
   entryPoints: ['./src/browser.ts'],
   outdir: 'docs/',
   minify: true,
-  platform: 'browser',
-  target: ['es2022'],
+  platform: 'browser'
 })

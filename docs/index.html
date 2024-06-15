@@ -16,12 +16,12 @@
         count++;
       }, 500);
       button.disabled = true;
-      const convert = await Asciidoctor.initFromURL('./asciidoctor.wasm');
+      const asciidoctor = await Asciidoctor.initFromURL('./asciidoctor.wasm');
       clearInterval(id);
       button.disabled = false;
       button.textContent = 'Convert';
       async function onClick() {
-        output.srcdoc = await convert(input.value, { standalone: true, safe: "safe" });
+        output.srcdoc = await asciidoctor.convert(input.value, { standalone: true, safe: "safe" });
       }
       button.addEventListener('click', onClick);
     </script>
