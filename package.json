@@ -1,6 +1,6 @@
 {
   "name": "asciidoctor-wasm",
-  "version": "0.2023.15",
+  "version": "0.2023.16",
   "type": "module",
   "main": "dist/node.js",
   "exports": {
