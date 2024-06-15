@@ -97,6 +97,7 @@ WASM binary contains a copy of several OSSs as follows:
     - rouge: https://github.com/rouge-ruby/rouge/blob/c150ef96045f0c054d0d28f37a5228cb3779fc7d/LICENSE
 - ruby.wasm: https://github.com/ruby/ruby.wasm/blob/fac40c1b7ffcb65b8c25e3c7c719fd1eac885e47/LICENSE
     - wasi-vfs: https://github.com/kateinoigakukun/wasi-vfs/blob/ad74438287035ea01f3ce895e495740f7981215c/LICENSE
+    - @bjorn3/browser_wasi_shim: https://github.com/bjorn3/browser_wasi_shim/blob/377fbebf89dc95ba2375b69d3ffbb5b39632b834/LICENSE-MIT
 
 If you notice the missing license information, please let us know.
 
