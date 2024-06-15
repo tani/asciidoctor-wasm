@@ -42,7 +42,7 @@ To initialize the Asciidoctor converter from a WebAssembly module:
 ```typescript
 const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
 const module = await WebAssembly.compileStreaming(fetch(wasmURL));
-const convert = await Asciidoctor.initFromModule(module);
+const asciidoctor = await Asciidoctor.initFromModule(module);
 ```
 
 #### From a WebAssembly URL
@@ -51,7 +51,7 @@ To initialize the Asciidoctor converter from a WebAssembly binary located at a U
 
 ```typescript
 const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
-const convert = await Asciidoctor.initFromURL(wasmURL);
+const asciidoctor = await Asciidoctor.initFromURL(wasmURL);
 ```
 
 #### From a WebAssembly Path
@@ -62,7 +62,7 @@ To initialize the Asciidoctor converter from a WebAssembly binary located at a p
 import {fileURLToPath} from 'node:url';
 const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
 const wasmPath = fileURLToPath(wasmURL);
-const convert = await Asciidoctor.initFromPath(wasmPath);
+const asciidoctor = await Asciidoctor.initFromPath(wasmPath);
 ```
 
 ### Converting Asciidoctor Content
@@ -77,7 +77,7 @@ const options: AsciidoctorOptions = {
   standalone: true,
 };
 
-const convertedContent = await convert(asciidoctorContent, options);
+const convertedContent = await asciidoctor.convert(asciidoctorContent, options);
 console.log(convertedContent);
 ```
 
