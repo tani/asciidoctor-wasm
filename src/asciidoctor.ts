@@ -20,35 +20,11 @@ export class Asciidoctor {
     const convert = await this.vm.evalAsync(`
       require 'asciidoctor'
       require 'js'
+      require 'json'
       lambda do |js_content, js_options|
         options = {}
-        JS.global[:Object].entries(js_options).forEach do |obj|
-          key, value = obj.to_a
-          case key.to_s
-          in 'attributes'
-            attrs = {}
-            JS.global[:Object].entries(value).forEach do |obj|
-              key, value = obj.to_a
-              if value.typeof == 'string'
-                attrs[key.to_s] = value.to_s
-              elsif value.typeof == 'boolean'
-                attrs[key.to_s] = !!value
-              elsif value == nil
-                attrs[key.to_s] = nil
-              else
-                attrs[key.to_s] = value
-              end
-            end
-            options[key.to_s.to_sym] = attrs
-          in 'safe'
-            options[key.to_s.to_sym] = value.to_s.to_sym
-          in 'standalone', 'sourcemap'
-            options[key.to_s.to_sym] = !!value
-          in 'backend', 'doctype'
-            options[key.to_s.to_sym] = value.to_s
-          else
-            options[key.to_s.to_sym] = value
-          end
+        for key, value in JSON.parse(JS.global[:JSON].stringify(js_options).to_s)
+          options[key.to_sym] = value
         end
         content = js_content.to_s
         Asciidoctor.convert(content, options)
