@@ -24,6 +24,7 @@
     "@ruby/wasm-wasi": "^2.6.1"
   },
   "devDependencies": {
+    "@asciidoctor/core": "^3.0.4",
     "@types/node": "^20.14.2",
     "esbuild": "^0.21.5",
     "tsx": "^4.15.4",

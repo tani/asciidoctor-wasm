@@ -1,19 +1,67 @@
 import test from "node:test";
 import assert from "node:assert";
-import { Asciidoctor } from "../dist/node.js";
+import AsciidoctorJS from "@asciidoctor/core";
+import { Asciidoctor, wasmURL } from "../dist/node.js";
+
+const adocJS = AsciidoctorJS();
+const adocWASM = await Asciidoctor.initFromPath(wasmURL.pathname);
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
-  const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
-  const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
-  const actualHtml = await asciidoctor.convert(adoc);
-  const expectedHtml = "<div class=\"paragraph\">\n<p>This is AsciiDoc.</p>\n</div>";
-  assert.strictEqual(actualHtml, expectedHtml);
-})
+
+  assert.strictEqual(adocJS.convert(adoc), await adocWASM.convert(adoc));
+});
+
+test("Test Asciidoctor WebAssembly conversion with attributes", async () => {
+  const adocWithAttributes = "= Hello, AsciiDoc!\n\nThis is AsciiDoc with an attribute.\n:author: John Doe";
+  const options = { attributes: { 'showtitle': true } } as const;
+
+  assert.strictEqual(adocJS.convert(adocWithAttributes, options), await adocWASM.convert(adocWithAttributes, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with backend option", async () => {
+  const options = { backend: "html5" } as const;
+  const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
+
+  assert.strictEqual(adocJS.convert(adoc, options), await adocWASM.convert(adoc, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with doctype option", async () => {
+  const options = { doctype: "book" } as const;
+  const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
+
+  assert.strictEqual(adocJS.convert(adoc, options), await adocWASM.convert(adoc, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with standalone option", async () => {
+  const options = { standalone: false } as const;
+  const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
+
+  assert.strictEqual(adocJS.convert(adoc, options), await adocWASM.convert(adoc, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with sourcemap option", async () => {
+  const options = { sourcemap: true } as const;
+  const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
+
+  assert.strictEqual(adocJS.convert(adoc, options), await adocWASM.convert(adoc, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with safe mode", async () => {
+  const options = { safe: "secure" } as const;
+  const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";
+
+  assert.strictEqual(adocJS.convert(adoc, options), await adocWASM.convert(adoc, options));
+});
+
+test("Test Asciidoctor WebAssembly conversion with different content", async () => {
+  const differentAdoc = "= Different Document\n\nThis is a different AsciiDoc content.\n";
+
+  assert.strictEqual(adocJS.convert(differentAdoc), await adocWASM.convert(differentAdoc));
+});
+
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc (codeblock) to HTML", async () => {
-  const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
-  const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = `
 :source-highlighter: rouge
 :rouge-style: github
@@ -23,7 +71,7 @@ test("Test Asciidoctor WebAssembly conversion from AsciiDoc (codeblock) to HTML"
 puts "Hello, World!"
 ----
   `
-  const actualHtml = await asciidoctor.convert(adoc, { safe: "safe" });
+  const actualHtml = await adocWASM.convert(adoc, { safe: "safe" });
   const expectedHtml =
     '<div class="listingblock">\n'+
     '<div class="content">\n'+
@@ -38,15 +86,13 @@ puts "Hello, World!"
 })
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc (codeblock) to HTML wit attrs", async () => {
-  const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
-  const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = `
 [source,ruby]
 ----
 puts "Hello, World!"
 ----
   `
-  const actualHtml = await asciidoctor.convert(adoc, {
+  const actualHtml = await adocWASM.convert(adoc, {
     safe: "safe",
     attributes: {
       "source-highlighter": "rouge",
