@@ -13,11 +13,10 @@ export interface AsciidoctorOptions {
 
 export class Asciidoctor {
   vm: RubyVM
+  code: string
   constructor(vm: RubyVM) {
     this.vm = vm;
-  }
-  async convert(content: string, options: AsciidoctorOptions = {}) {
-    const convert = await this.vm.evalAsync(`
+    this.code = `
       require 'asciidoctor'
       require 'js'
       require 'json'
@@ -29,7 +28,15 @@ export class Asciidoctor {
         content = js_content.to_s
         Asciidoctor.convert(content, options)
       end
-    `);
+    `
+  }
+  convertSync(content: string, options: AsciidoctorOptions = {}) {
+    const convert = this.vm.eval(this.code);
+    const result = convert.call("call", this.vm.wrap(content), this.vm.wrap(options));
+    return result.toString();
+  }
+  async convert(content: string, options: AsciidoctorOptions = {}) {
+    const convert = await this.vm.evalAsync(this.code);
     const result = await convert.callAsync("call", this.vm.wrap(content), this.vm.wrap(options));
     return result.toString();
   }
