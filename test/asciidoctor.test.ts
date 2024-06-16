@@ -11,7 +11,7 @@ test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () =
   assert.strictEqual(actualHtml, expectedHtml);
 })
 
-test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
+test("Test Asciidoctor WebAssembly conversion from AsciiDoc (codeblock) to HTML", async () => {
   const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
   const asciidoctor = await Asciidoctor.initFromPath(path);
   const adoc = `
@@ -24,6 +24,34 @@ puts "Hello, World!"
 ----
   `
   const actualHtml = await asciidoctor.convert(adoc, { safe: "safe" });
+  const expectedHtml =
+    '<div class="listingblock">\n'+
+    '<div class="content">\n'+
+    '<pre class="rouge highlight">'+
+    '<code data-lang="ruby">'+
+    '<span class="nb">puts</span> <span class="s2">"Hello, World!"</span>'+
+    '</code>'+
+    '</pre>\n'+
+    '</div>\n'+
+    '</div>'
+  assert.strictEqual(actualHtml, expectedHtml);
+})
+
+test("Test Asciidoctor WebAssembly conversion from AsciiDoc (codeblock) to HTML wit attrs", async () => {
+  const path = `${import.meta.dirname}/../dist/asciidoctor.wasm`;
+  const asciidoctor = await Asciidoctor.initFromPath(path);
+  const adoc = `
+[source,ruby]
+----
+puts "Hello, World!"
+----
+  `
+  const actualHtml = await asciidoctor.convert(adoc, {
+    safe: "safe",
+    attributes: {
+      "source-highlighter": "rouge",
+      "rouge-style": "github",
+    }});
   const expectedHtml =
     '<div class="listingblock">\n'+
     '<div class="content">\n'+
