@@ -1,4 +1,4 @@
-import { Asciidoctor as AsciidoctorWASM, wasmURL } from "./dist/browser.js";
+import { Asciidoctor as AsciidoctorWASM, wasmURL } from "jsr:@gem/asciidoctor-wasm/deno";
 import createAsciidoctorJS from "npm:@asciidoctor/core@3.0.4";
 import { readFile } from "node:fs/promises";
 

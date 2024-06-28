@@ -1,4 +1,5 @@
-import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/browser';
+// import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/browser';
+import { DefaultRubyVM } from './ruby.ts';
 import { Asciidoctor as AsciidoctorBase } from './asciidoctor.ts';
 export type { AsciidoctorOptions } from './asciidoctor.ts';
 

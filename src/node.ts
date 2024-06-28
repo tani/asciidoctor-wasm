@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import { gunzip } from 'node:zlib';
 import { promisify } from 'node:util';
-import { DefaultRubyVM } from '@ruby/wasm-wasi/dist/node';
+import { DefaultRubyVM } from './ruby.ts';
 import { Asciidoctor as AsciidoctorBase } from './asciidoctor.ts';
 export type { AsciidoctorOptions } from './asciidoctor.ts';
 
