@@ -1,6 +1,6 @@
 {
   "name": "@gem/asciidoctor-wasm",
-  "version": "0.2023.20",
+  "version": "0.2023.21",
   "exports": "./src/browser.ts",
   "imports": {
     "@bjorn3/browser_wasi_shim": "npm:@bjorn3/browser_wasi_shim@^0.3.0",
@@ -17,7 +17,7 @@
       "src/*.ts",
       "LICENSE",
       "README.md",
-      "asciidoctor.wasm"
+      "asciidoctor.wasm.gz"
     ]
   }
 }

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- bootstrap -->
     <script type="module">
-      import { Asciidoctor } from 'https://esm.sh/jsr/@gem/asciidoctor-wasm';
+      import { Asciidoctor, wasmURL } from 'https://esm.sh/jsr/@gem/asciidoctor-wasm';
       const input = document.getElementById('input');
       const output = document.getElementById('output');
       const button = document.getElementById('convert');
@@ -16,7 +16,7 @@
         count++;
       }, 500);
       button.disabled = true;
-      const asciidoctor = await Asciidoctor.initFromURL('./asciidoctor.wasm.gz');
+      const asciidoctor = await Asciidoctor.initFromURL(wasmURL);
       clearInterval(id);
       button.disabled = false;
       button.textContent = 'Convert';
