@@ -9,8 +9,7 @@
   "tasks": {
     "test": "deno test -A test/*.test.ts",
     "ruby:install": "bundle install",
-    "ruby:build": "bundle exec rbwasm build -o asciidoctor.wasm && npx --yes -p wabt wasm-strip asciidoctor.wasm -o asciidoctor.wasm && gzip -f asciidoctor.wasm",
-    "docs:build": "cp asciidoctor.wasm.gz docs/asciidoctor.wasm.gz"
+    "ruby:build": "bundle exec rbwasm build -o asciidoctor.wasm && npx --yes -p wabt wasm-strip asciidoctor.wasm -o asciidoctor.wasm && gzip -f asciidoctor.wasm"
   },
   "publish": {
     "include": [
