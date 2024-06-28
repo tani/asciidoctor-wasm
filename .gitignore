@@ -136,3 +136,4 @@ dist
 
 *.js
 *.map
+*.wasm.gz

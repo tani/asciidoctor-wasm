@@ -32,12 +32,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies
-        run: npm install
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
       - name: Build project
-        run: npm run build
+        run: deno task ruby:build
       - name: Run tests
-        run: npm run test
+        run: deno task test
+      - name: Build docs
+        run: deno task docs:build
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

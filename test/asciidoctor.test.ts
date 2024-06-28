@@ -1,10 +1,10 @@
 import test from "node:test";
 import assert from "node:assert";
-import AsciidoctorJS from "@asciidoctor/core";
-import { Asciidoctor, wasmURL } from "../dist/node.js";
+import AsciidoctorJS from "npm:@asciidoctor/core";
+import { Asciidoctor, wasmURL } from "../src/browser.ts";
 
 const adocJS = AsciidoctorJS();
-const adocWASM = await Asciidoctor.initFromPath(wasmURL.pathname);
+const adocWASM = await Asciidoctor.initFromURL(wasmURL);
 
 test("Test Asciidoctor WebAssembly conversion from AsciiDoc to HTML", async () => {
   const adoc = "= Hello, AsciiDoc!\n\nThis is AsciiDoc.\n";

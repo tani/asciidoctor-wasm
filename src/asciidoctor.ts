@@ -30,12 +30,12 @@ export class Asciidoctor {
       end
     `
   }
-  convertSync(content: string, options: AsciidoctorOptions = {}) {
+  convertSync(content: string, options: AsciidoctorOptions = {}): string {
     const convert = this.vm.eval(this.code);
     const result = convert.call("call", this.vm.wrap(content), this.vm.wrap(options));
     return result.toString();
   }
-  async convert(content: string, options: AsciidoctorOptions = {}) {
+  async convert(content: string, options: AsciidoctorOptions = {}): Promise<string> {
     const convert = await this.vm.evalAsync(this.code);
     const result = await convert.callAsync("call", this.vm.wrap(content), this.vm.wrap(options));
     return result.toString();
