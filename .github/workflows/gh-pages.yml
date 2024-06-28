@@ -37,7 +37,7 @@ jobs:
         with:
           deno-version: v1.x
       - name: Build project
-        run: deno task ruby:build
+        run: deno task ruby:install && deno task ruby:build
       - name: Run tests
         run: deno task test
       - name: Setup Pages
