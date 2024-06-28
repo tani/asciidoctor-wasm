@@ -12,10 +12,10 @@ export class Asciidoctor extends AsciidoctorBase {
   static async initFromURL(url: string | URL): Promise<Asciidoctor> {
     const response = await fetch(url);
     const decpressionStream = new DecompressionStream('gzip');
-    const decompressedRespnose = new Response(response.body!.pipeThrough(decpressionStream));
+    const decompressedResponse = new Response(response.body!.pipeThrough(decpressionStream));
     // set content-type to application/wasm
-    decompressedRespnose.headers.set('content-type', 'application/wasm');
-    const module = await WebAssembly.compileStreaming(decompressedRespnose);
+    decompressedResponse.headers.set('content-type', 'application/wasm');
+    const module = await WebAssembly.compileStreaming(decompressedResponse);
     const base = await AsciidoctorBase.initFromModule(module, DefaultRubyVM);
     return new Asciidoctor(base.vm);
   }

@@ -12,14 +12,6 @@ export class Asciidoctor extends AsciidoctorBase {
     const base = await AsciidoctorBase.initFromModule(module, DefaultRubyVM);
     return new Asciidoctor(base.vm);
   }
-  static async initFromURL(url: string | URL): Promise<Asciidoctor> {
-    const response = await fetch(url);
-    const decpressionStream = new DecompressionStream('gzip');
-    const decompressedRespnose = new Response(response.body!.pipeThrough(decpressionStream));
-    const module = await WebAssembly.compileStreaming(decompressedRespnose);
-    const base = await AsciidoctorBase.initFromModule(module, DefaultRubyVM);
-    return new Asciidoctor(base.vm);
-  }
   static async initFromPath(path: string): Promise<Asciidoctor> {
     const compressed = await fs.readFile(path);
     const decompressed = await promisify(gunzip)(compressed);

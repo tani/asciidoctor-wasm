@@ -23,7 +23,9 @@ https://jsr.io/@gem/asciidoctor-wasm
 You can import the necessary functions and constants from the module:
 
 ```typescript
-import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm";
+import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm/browser";
+import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm/deno";
+import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm/node";
 ```
 
 ### Initializing the Converter
@@ -33,8 +35,12 @@ import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm";
 To initialize the Asciidoctor converter from a WebAssembly module:
 
 ```typescript
-const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm');
-const module = await WebAssembly.compileStreaming(fetch(wasmURL));
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm.gz');
+const response = await fetch(url);
+const decpressionStream = new DecompressionStream('gzip');
+const decompressedResponse = new Response(response.body!.pipeThrough(decpressionStream));
+decompressedResponse.headers.set('content-type', 'application/wasm');
+const module = await WebAssembly.compileStreaming(decompressedResponse);
 const asciidoctor = await Asciidoctor.initFromModule(module);
 ```
 
@@ -43,7 +49,7 @@ const asciidoctor = await Asciidoctor.initFromModule(module);
 To initialize the Asciidoctor converter from a WebAssembly binary located at a URL:
 
 ```typescript
-const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm');
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm.gz');
 const asciidoctor = await Asciidoctor.initFromURL(wasmURL);
 ```
 
@@ -53,7 +59,7 @@ To initialize the Asciidoctor converter from a WebAssembly binary located at a p
 
 ```typescript
 import {fileURLToPath} from 'node:url';
-const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/dist/asciidoctor.wasm');
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm.gz');
 const wasmPath = fileURLToPath(wasmURL);
 const asciidoctor = await Asciidoctor.initFromPath(wasmPath);
 ```
