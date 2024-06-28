@@ -14,9 +14,7 @@ You can try out the Asciidoctor WASM in the [Playground](https://tani.github.io/
 
 Ensure you have Node.js installed, then install the necessary dependencies:
 
-```sh
-npm install asciidoctor-wasm
-```
+https://jsr.io/@gem/asciidoctor-wasm
 
 ## Usage
 
@@ -25,10 +23,7 @@ npm install asciidoctor-wasm
 You can import the necessary functions and constants from the module:
 
 ```typescript
-// Node
-import { Asciidoctor, wasmURL } from "asciidoctor-wasm/dist/node.js";
-// Browser or Deno
-import { Asciidoctor, wasmURL } from "asciidoctor-wasm/dist/browser.js";
+import { Asciidoctor, wasmURL } from "@gem/asciidoctor-wasm";
 ```
 
 ### Initializing the Converter
@@ -38,7 +33,7 @@ import { Asciidoctor, wasmURL } from "asciidoctor-wasm/dist/browser.js";
 To initialize the Asciidoctor converter from a WebAssembly module:
 
 ```typescript
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm');
 const module = await WebAssembly.compileStreaming(fetch(wasmURL));
 const asciidoctor = await Asciidoctor.initFromModule(module);
 ```
@@ -48,7 +43,7 @@ const asciidoctor = await Asciidoctor.initFromModule(module);
 To initialize the Asciidoctor converter from a WebAssembly binary located at a URL:
 
 ```typescript
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/asciidoctor.wasm');
 const asciidoctor = await Asciidoctor.initFromURL(wasmURL);
 ```
 
@@ -58,7 +53,7 @@ To initialize the Asciidoctor converter from a WebAssembly binary located at a p
 
 ```typescript
 import {fileURLToPath} from 'node:url';
-const wasmURL = import.meta.resolve('asciidoctor-wasm/dist/asciidoctor.wasm');
+const wasmURL = import.meta.resolve('@gem/asciidoctor-wasm/dist/asciidoctor.wasm');
 const wasmPath = fileURLToPath(wasmURL);
 const asciidoctor = await Asciidoctor.initFromPath(wasmPath);
 ```
