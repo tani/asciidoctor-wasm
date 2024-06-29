@@ -80,6 +80,13 @@ const convertedContent = await asciidoctor.convert(asciidoctorContent, options);
 console.log(convertedContent);
 ```
 
+## Development
+
+1. `deno task ruby:install`: Install dependencies for building Ruby.
+2. `deno task ruby:build`: Build Ruby.
+3. `deno task test`: Run the tests.
+4. `deno task benchmark`: Run the benchmark.
+
 ## Versioning
 
 This module follows the versioning of the Asciidoctor library it is based on.

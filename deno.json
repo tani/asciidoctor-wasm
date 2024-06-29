@@ -12,6 +12,7 @@
   },
   "tasks": {
     "test": "deno test -A test/*.test.ts",
+    "benchmark": "cd benchmark && deno bench -A benchmark.ts",
     "ruby:install": "bundle install",
     "ruby:build": "bundle exec rbwasm build -o asciidoctor.wasm && npx --yes -p wabt wasm-strip asciidoctor.wasm -o asciidoctor.wasm && gzip -f asciidoctor.wasm"
   },
