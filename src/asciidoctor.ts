@@ -1,24 +1,6 @@
-import { RubyVM } from "@ruby/wasm-wasi/dist/vm";
-import { WASI, useAll } from "uwasi";
+import type { RubyVM } from "@ruby/wasm-wasi/dist/vm";
 
-interface Result {
-  vm: RubyVM,
-  wasi: WASI,
-  instance: WebAssembly.Instance
-}
-
-// This code is based on ruby/wasm-wasi licensed under the MIT License
-async function DefaultRubyVM(rubyModule: WebAssembly.Module): Promise<Result> {
-  const wasi = new WASI({features: [useAll()]});
-  const vm = new RubyVM();
-  const imports = { wasi_snapshot_preview1: wasi.wasiImport };
-  vm.addToImports(imports);
-  const instance = await WebAssembly.instantiate(rubyModule, imports);
-  await vm.setInstance(instance);
-  wasi.initialize(instance);
-  vm.initialize();
-  return { vm, wasi, instance };
-};
+type DefaultRubyVM = (module: WebAssembly.Module) => Promise<{ vm: RubyVM }>;
 
 /**
  * Interface for the options that can be passed to the Asciidoctor converter.
@@ -95,9 +77,10 @@ export class Asciidoctor {
   /**
    * Initializes an Asciidoctor instance from a WebAssembly module.
    * @param {WebAssembly.Module} module - The WebAssembly module to use for initializing the Ruby VM.
+   * @param {DefaultRubyVM} DefaultRubyVM - The default Ruby VM factory function.
    * @returns {Promise<Asciidoctor>} A promise that resolves to an Asciidoctor instance.
    */
-  static async initFromModule(module: WebAssembly.Module): Promise<Asciidoctor> {
+  static async initFromModule(module: WebAssembly.Module, DefaultRubyVM: DefaultRubyVM): Promise<Asciidoctor> {
     const { vm } = await DefaultRubyVM(module);
     return new Asciidoctor(vm)
   }
