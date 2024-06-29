@@ -1,6 +1,6 @@
 {
   "name": "@gem/asciidoctor-wasm",
-  "version": "0.2023.24",
+  "version": "0.2023.25",
   "exports": {
     "./deno": "./src/browser.ts",
     "./browser": "./src/browser.ts",
