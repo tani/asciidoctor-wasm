@@ -1,3 +1,8 @@
+/**
+ * This module provides the browser-specific implementation of Asciidoctor.
+ * @module
+ */
+
 import { Asciidoctor as AsciidoctorBase } from './asciidoctor.ts';
 export type { AsciidoctorOptions } from './asciidoctor.ts';
 

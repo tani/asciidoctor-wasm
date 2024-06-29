@@ -1,3 +1,8 @@
+/**
+ * This module provides the node-specific implementation of Asciidoctor.
+ * @module
+ */
+
 import { promises as fs } from 'node:fs';
 import { gunzip } from 'node:zlib';
 import { promisify } from 'node:util';
@@ -11,7 +16,6 @@ export const wasmURL: URL = new URL('../asciidoctor.wasm.gz', import.meta.url);
 
 /**
  * Class representing Asciidoctor.
- * Extends from AsciidoctorBase.
  */
 export class Asciidoctor extends AsciidoctorBase {
   /**
