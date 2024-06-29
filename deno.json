@@ -1,14 +1,13 @@
 {
   "name": "@gem/asciidoctor-wasm",
-  "version": "0.2023.26",
+  "version": "0.2023.27",
   "exports": {
     "./deno": "./src/browser.ts",
     "./browser": "./src/browser.ts",
     "./node": "./src/node.ts"
   },
   "imports": {
-    "@ruby/wasm-wasi": "npm:@ruby/wasm-wasi@^2.6.1",
-    "uwasi": "npm:uwasi@^1.2.0"
+    "@ruby/wasm-wasi": "npm:@ruby/wasm-wasi@^2.6.2"
   },
   "tasks": {
     "test": "deno test -A test/*.test.ts",
